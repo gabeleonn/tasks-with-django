@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>All Tasks</title>
+    </head>
+    <body>
+        {% for task in tasks %}
+            <li><input type="checkbox"
+                {% if task.is_completed is True %}
+                    checked
+                {% endif %}/>
+                <a href="{% url 'update' task.id %}">{{ task.description }}</a>
+            </li>
+        {% endfor %}
+        <hr>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" name="button">Add</button>
+        </form>
+    </body>
+</html>
